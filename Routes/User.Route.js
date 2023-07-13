@@ -8,7 +8,7 @@ const userRoutes = express.Router()
 userRoutes.post("/signup", async(req,res)=>{
     const {email,password} = req.body
     try {
-        let user = await user.findOne({ email: email})
+        let user = await UserModel.findOne({ email: email})
         if(user){
             res.status(200).json({msg:"user already registered"})
         }else{

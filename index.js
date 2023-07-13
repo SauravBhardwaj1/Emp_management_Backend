@@ -1,26 +1,27 @@
 const express = require('express')
 const { userRoutes } = require('./Routes/User.Route')
 const { connection } = require('./Config/db')
-require("dotenv").config()
+const { empRoutes } = require('./Routes/Employee.route')
+require('dotenv').config()
 
 const app = express()
 
 
 app.use(express.json())
 
-app.use("/user",userRoutes())
+app.use("/user",userRoutes)
 
-app.use("/emp",empRoutes());
+app.use("/emp",empRoutes);
 
 
 
-app.listen(process.env.PORT, async()=>{
+app.listen(process.env.PORT, async(req,res)=>{
     try {
         await connection
         console.log("Connected to DB server")
 
     } catch (error) {
-        console.log(error)
+        console.log(error.message)
     }
     console.log(`server is running at ${process.env.PORT}`)
 })
